@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bmgdxpsqqh3fs"]
 
 [ext_resource type="Texture2D" uid="uid://bx62gvfdw6sni" path="res://Assets/overlay.png" id="1_fsfxo"]
-[ext_resource type="Script" uid="uid://pvunsc71x57l" path="res://Scenes/track.gd" id="2_6tq3j"]
+[ext_resource type="Script" uid="uid://pvunsc71x57l" path="res://Scripts/track.gd" id="2_6tq3j"]
 
 [node name="TrackSprite" type="Sprite3D" unique_id=512189859]
 pixel_size = 0.005
