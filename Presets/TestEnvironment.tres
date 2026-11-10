@@ -1,0 +1,23 @@
+[gd_resource type="Environment" format=3 uid="uid://cpae8t0i4i2b8"]
+
+[ext_resource type="Shader" uid="uid://pisop28oq4dj" path="res://Shaders/camera_test_sky.gdshader" id="1_cqfmf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mnsr6"]
+shader = ExtResource("1_cqfmf")
+shader_parameter/grid_spacing = 10.0
+shader_parameter/line_width = 0.15
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/north_color = Color(1, 0, 0, 1)
+shader_parameter/east_color = Color(0, 0, 1, 1)
+shader_parameter/south_color = Color(0.5, 0.5, 1, 1)
+shader_parameter/west_color = Color(0.5, 0.5, 1, 1)
+shader_parameter/horizon_color = Color(0, 1, 0, 1)
+
+[sub_resource type="Sky" id="Sky_mkbvx"]
+sky_material = SubResource("ShaderMaterial_mnsr6")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_mkbvx")
+reflected_light_source = 1

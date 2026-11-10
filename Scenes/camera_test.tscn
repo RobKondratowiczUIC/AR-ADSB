@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cfebjuufn0k3a"]
+
+[ext_resource type="Environment" uid="uid://cpae8t0i4i2b8" path="res://Presets/TestEnvironment.tres" id="1_2yjip"]
+[ext_resource type="Script" uid="uid://bpuvx21ifti8t" path="res://Scripts/phone_matcher.gd" id="1_mkbvx"]
+[ext_resource type="Script" uid="uid://mq0cwd5meojy" path="res://Scripts/track_manager.gd" id="4_2qq08"]
+
+[node name="Node3D" type="Node3D" unique_id=886142116]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=151119552]
+environment = ExtResource("1_2yjip")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1574349349]
+fov = 30.0
+near = 1.0
+far = 100000.0
+script = ExtResource("1_mkbvx")
+
+[node name="TrackManager" type="Node" parent="." unique_id=788692483]
+script = ExtResource("4_2qq08")

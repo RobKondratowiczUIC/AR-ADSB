@@ -1,0 +1,190 @@
+[gd_scene format=3 uid="uid://cuw6ayh1rku3o"]
+
+[ext_resource type="Script" uid="uid://cehphecwtsyvy" path="res://Scripts/main_app.gd" id="1_6v6rh"]
+[ext_resource type="PackedScene" uid="uid://cfebjuufn0k3a" path="res://Scenes/camera_test.tscn" id="1_cbjc3"]
+[ext_resource type="Texture2D" uid="uid://dyecji531e7na" path="res://addons/at-icons/node/ellipsis_horizontal.svg" id="1_pfnfr"]
+[ext_resource type="Script" uid="uid://dvdnn1fcbr2b3" path="res://Scripts/SubViewportMatcher.gd" id="1_x12gx"]
+[ext_resource type="Script" uid="uid://coprra4jfprn7" path="res://Scenes/cam_texture_rect.gd" id="2_1saqj"]
+[ext_resource type="Shader" uid="uid://0b4lftbmbjr5" path="res://Shaders/camera_feed.gdshader" id="2_5w33x"]
+[ext_resource type="Theme" uid="uid://6mweymr2l80b" path="res://Themes/mobile_ui.tres" id="2_8iv46"]
+
+[sub_resource type="CameraTexture" id="CameraTexture_sdqqh"]
+camera_feed_id = 1
+which_feed = 1
+
+[sub_resource type="CameraTexture" id="CameraTexture_76kbw"]
+camera_feed_id = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5w33x"]
+shader = ExtResource("2_5w33x")
+shader_parameter/camera_y = SubResource("CameraTexture_76kbw")
+shader_parameter/camera_cbcr = SubResource("CameraTexture_sdqqh")
+
+[sub_resource type="CameraTexture" id="CameraTexture_3wjr2"]
+camera_feed_id = 1
+
+[sub_resource type="CameraTexture" id="CameraTexture_5w33x"]
+camera_feed_id = 1
+
+[node name="Main" type="Node" unique_id=1944522633]
+script = ExtResource("1_6v6rh")
+
+[node name="Control" type="Control" parent="." unique_id=801967996]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Control" unique_id=2083160463]
+material = SubResource("ShaderMaterial_5w33x")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CameraTexture_3wjr2")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=1547857104]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CameraTexture_5w33x")
+expand_mode = 1
+stretch_mode = 6
+script = ExtResource("2_1saqj")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=350699019]
+visible = false
+layout_mode = 0
+offset_left = 280.0
+offset_right = 1000.0
+offset_bottom = 720.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Control/MarginContainer" unique_id=1911232446]
+visible = false
+propagate_maximum_size = false
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control" unique_id=1076418810]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x12gx")
+
+[node name="SubViewport" type="SubViewport" parent="Control/SubViewportContainer" unique_id=2108622305]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="Node3D" parent="Control/SubViewportContainer/SubViewport" unique_id=886142116 instance=ExtResource("1_cbjc3")]
+
+[node name="UI" type="Control" parent="Control" unique_id=1268825965]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_8iv46")
+
+[node name="Button" type="Button" parent="Control/UI" unique_id=1144506433]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -80.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+icon = ExtResource("1_pfnfr")
+icon_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/UI" unique_id=752476992]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1189.0
+offset_top = -678.0
+offset_right = -95.0
+offset_bottom = -30.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/UI/PanelContainer" unique_id=1849404878]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/UI/PanelContainer/VBoxContainer" unique_id=1703137258]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/UI/PanelContainer/VBoxContainer/HBoxContainer" unique_id=872257310]
+layout_mode = 2
+text = "Virtual Camera FOV"
+
+[node name="HSlider" type="HSlider" parent="Control/UI/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1619855383]
+custom_minimum_size = Vector2(174.94, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 5.0
+value = 30.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/UI/PanelContainer/VBoxContainer" unique_id=850504457]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/UI/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=2043448381]
+layout_mode = 2
+text = "ACC K Factor"
+
+[node name="HSlider" type="HSlider" parent="Control/UI/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=990197246]
+custom_minimum_size = Vector2(174.94, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.0
+value = 0.5
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/UI/PanelContainer/VBoxContainer" unique_id=1200386461]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/UI/PanelContainer/VBoxContainer/HBoxContainer3" unique_id=1852848365]
+layout_mode = 2
+text = "MAG K Factor"
+
+[node name="HSlider" type="HSlider" parent="Control/UI/PanelContainer/VBoxContainer/HBoxContainer3" unique_id=828541443]
+custom_minimum_size = Vector2(174.94, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.0
+value = 0.9
+
+[connection signal="pressed" from="Control/UI/Button" to="." method="_on_button_pressed"]
+[connection signal="value_changed" from="Control/UI/PanelContainer/VBoxContainer/HBoxContainer/HSlider" to="." method="_on_fov_slider_value_changed"]
+[connection signal="value_changed" from="Control/UI/PanelContainer/VBoxContainer/HBoxContainer2/HSlider" to="." method="_on_acck_slider_value_changed"]
+[connection signal="value_changed" from="Control/UI/PanelContainer/VBoxContainer/HBoxContainer3/HSlider" to="." method="_on_magk_slider_value_changed"]

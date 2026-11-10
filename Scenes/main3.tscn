@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://6c6baevbfnyt"]
+
+[ext_resource type="Script" uid="uid://bpuvx21ifti8t" path="res://Scripts/phone_matcher.gd" id="1_t8cgy"]
+[ext_resource type="Script" uid="uid://cottm51f01w75" path="res://Scripts/adsb_screen_space_drawing.gd" id="1_ya65q"]
+[ext_resource type="Script" uid="uid://c8xmkgpax1fi5" path="res://Scripts/adsb_track_manager.gd" id="2_nw0xt"]
+
+[node name="Main3" type="Node" unique_id=1685610158]
+
+[node name="UI" type="Control" parent="." unique_id=2068386677]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ya65q")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI" unique_id=1848983415]
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 512.0
+
+[node name="SubViewport" type="SubViewport" parent="UI/SubViewportContainer" unique_id=2046851379]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="UI/SubViewportContainer/SubViewport" unique_id=1548413076]
+
+[node name="PhoneMatcher" type="Camera3D" parent="UI/SubViewportContainer/SubViewport/Node3D" unique_id=1205466985]
+script = ExtResource("1_t8cgy")
+
+[node name="ADSBTrackManager" type="Node3D" parent="UI/SubViewportContainer/SubViewport/Node3D" unique_id=1461448898]
+script = ExtResource("2_nw0xt")
