@@ -67,7 +67,7 @@ func process_tracks(json_obj):
 			add_child(track_node)
 			track_dict[track_json["hex"]] = track_node
 		track_node.position = geo_to_local(float(track_json["lat"]),float(track_json["lon"]),float(track_json["alt_baro"]) * 0.3048)
-		track_node.speed_fts = float(track_json["gs"])
+		track_node.speed_fts = float(track_json["gs"]) if track_json.has("gs") else 0.0 
 		track_node.heading = float(track_json["track"]) if track_json.has("track") else 0.0 
 		track_node.vertical_speed_ftm = float(track_json["baro_rate"]) if track_json.has("baro_rate") else (float(track_json["geom_rate"]) if track_json.has("geom_rate") else 0.0)
 
