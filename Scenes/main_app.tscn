@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cuw6ayh1rku3o"]
 
 [ext_resource type="Script" uid="uid://cehphecwtsyvy" path="res://Scripts/main_app.gd" id="1_6v6rh"]
-[ext_resource type="PackedScene" uid="uid://cfebjuufn0k3a" path="res://Scenes/camera_test.tscn" id="1_cbjc3"]
+[ext_resource type="PackedScene" uid="uid://cfebjuufn0k3a" path="res://Scenes/ADSB_world.tscn" id="1_cbjc3"]
 [ext_resource type="Texture2D" uid="uid://dyecji531e7na" path="res://addons/at-icons/node/ellipsis_horizontal.svg" id="1_pfnfr"]
 [ext_resource type="Script" uid="uid://dvdnn1fcbr2b3" path="res://Scripts/SubViewportMatcher.gd" id="1_x12gx"]
 [ext_resource type="Script" uid="uid://coprra4jfprn7" path="res://Scenes/cam_texture_rect.gd" id="2_1saqj"]
@@ -25,6 +25,24 @@ camera_feed_id = 1
 
 [sub_resource type="CameraTexture" id="CameraTexture_5w33x"]
 camera_feed_id = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_5w33x"]
+font_size = 24
+font_color = Color(0, 1, 0, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_76kbw"]
+font_size = 24
+font_color = Color(0, 1, 0, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vlcof"]
+font_size = 24
+font_color = Color(0, 1, 0, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Main" type="Node" unique_id=1944522633]
 script = ExtResource("1_6v6rh")
@@ -102,6 +120,44 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_8iv46")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/UI" unique_id=1921278341]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -90.0
+offset_right = 244.0
+offset_bottom = -40.0
+grow_vertical = 0
+
+[node name="Hex" type="Label" parent="Control/UI/HBoxContainer" unique_id=1300408545]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Hex:"
+label_settings = SubResource("LabelSettings_5w33x")
+
+[node name="Type" type="Label" parent="Control/UI/HBoxContainer" unique_id=213050741]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Type: "
+label_settings = SubResource("LabelSettings_76kbw")
+
+[node name="Altitude" type="Label" parent="Control/UI/HBoxContainer" unique_id=520973602]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Alt:"
+label_settings = SubResource("LabelSettings_vlcof")
+
+[node name="TrackInfo" type="Control" parent="Control/UI" unique_id=1502276978]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
 
 [node name="Button" type="Button" parent="Control/UI" unique_id=1144506433]
 layout_mode = 1
@@ -184,6 +240,7 @@ max_value = 1.0
 step = 0.0
 value = 0.9
 
+[connection signal="selected_track_changed" from="Control/SubViewportContainer/SubViewport/Node3D" to="." method="_on_adsb_world_selected_track_changed"]
 [connection signal="pressed" from="Control/UI/Button" to="." method="_on_button_pressed"]
 [connection signal="value_changed" from="Control/UI/PanelContainer/VBoxContainer/HBoxContainer/HSlider" to="." method="_on_fov_slider_value_changed"]
 [connection signal="value_changed" from="Control/UI/PanelContainer/VBoxContainer/HBoxContainer2/HSlider" to="." method="_on_acck_slider_value_changed"]

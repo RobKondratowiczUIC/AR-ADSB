@@ -3,13 +3,20 @@
 [ext_resource type="Texture2D" uid="uid://bx62gvfdw6sni" path="res://Assets/overlay.png" id="1_fsfxo"]
 [ext_resource type="Script" uid="uid://pvunsc71x57l" path="res://Scripts/track.gd" id="2_6tq3j"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_iaonp"]
+radius = 0.1
+
 [node name="TrackSprite" type="Sprite3D" unique_id=512189859]
 pixel_size = 0.005
 billboard = 1
 double_sided = false
-fixed_size = true
 alpha_cut = 1
 alpha_scissor_threshold = 0.485
 texture_filter = 5
 texture = ExtResource("1_fsfxo")
 script = ExtResource("2_6tq3j")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=926379502]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1618894906]
+shape = SubResource("SphereShape3D_iaonp")
